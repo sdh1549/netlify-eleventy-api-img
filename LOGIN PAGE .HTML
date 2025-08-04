@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Swaba Friends</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url('/leopard.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 34, 0.7);
+            z-index: -1;
+        }
+        
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            background: rgba(97, 95, 95, 0.5);
+            box-shadow: 0 15px 35px rgba(133, 131, 131, 0.3);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .login-header p {
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+        }
+        
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #4a6fa5, #6a8caf);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .login-btn:hover {
+            background: linear-gradient(45deg, #3a5f95, #5a7c9f);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .divider span {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #fff;
+        }
+        
+        .google-btn {
+            background: #DB4437;
+        }
+        
+        .google-btn:hover {
+            background: #C23321;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .facebook-btn {
+            background: #4267B2;
+        }
+        
+        .facebook-btn:hover {
+            background: #365899;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .social-btn i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .signup-link a {
+            color: #6a8caf;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+        
+        .back-link i {
+            margin-right: 8px;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            color: #fff;
+            z-index: 1000;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            background: rgba(40, 167, 69, 0.8);
+        }
+        
+        .notification.error {
+            background: rgba(220, 53, 69, 0.8);
+        }
+        
+        @media (max-width: 500px) {
+            .login-container {
+                padding: 20px;
+            }
+            
+            .login-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+    </style>
+    </style>
+</head>
+<body>
+
+    
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Login</h1>
+            <p>Welcome to Swaba Friends</p>
+        </div>
+        
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+        
+        <div class="divider">
+            <span>OR</span>
+        </div>
+        
+        <div class="social-login">
+            <a href="#" class="social-btn google-btn" id="googleLoginBtn">
+                <i class="fab fa-google"></i> Login with Google
+            </a>
+            
+            <a href="#" class="social-btn facebook-btn" id="facebookLoginBtn">
+                <i class=""></i> Login with Facebook
+            </a>
+        </div>
+        
+        <div class="signup-link">
+            Don't have an account? <a href="#">Sign Up</a>
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <!-- Google Sign-In Script -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+    <!-- Facebook SDK -->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+
+    <script>
+
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : 'YOUR_FACEBOOK_APP_ID', 
+                xfbml      : true,
+                version    : 'v13.0'
+            });
+        };
+        
+        // Show notification
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = 'notification ' + type;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+        
+        // Regular form login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple validation
+            if (username.trim() === '' || email.trim() === '' || password.trim() === '') {
+                showNotification('Please fill all fields', 'error');
+                return;
+            }
+            
+
+            showNotification('Login successful! Redirecting...', 'success');
+            
+
+            setTimeout(() => {
+                window.location.href = 'rough.html';
+            }, 2000);
+        });
+        
+        // Google Login
+        document.getElementById('googleLoginBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Initialize Google Sign-In
+            google.accounts.id.initialize({
+                client_id: 'YOUR_GOOGLE_CLIENT_ID',
+                callback: handleGoogleResponse
+            });
+            
+            // Prompt the user to sign in
+            google.accounts.id.prompt();
+        });
+        
+        function handleGoogleResponse(response) {
+            if (response.credential) {
+
+                showNotification('Google login successful! Redirecting...', 'success');
+                
+                // Redirect to main page after successful login
+                setTimeout(() => {
+                    window.location.href = 'rough.html';
+                }, 2000);
+            } else {
+                showNotification('Google login failed. Please try again.', 'error');
+            }
+        }
+        
+        // Facebook Login
+        document.getElementById('facebookLoginBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            FB.login(function(response) {
+                if (response.authResponse) {
+                    // User is logged in
+                    FB.api('/me', {fields: 'name,email'}, function(response) {
+                        // Send the user data to your server
+                        // For demo purposes, we'll just show a success message
+                        showNotification('Facebook login successful! Redirecting...', 'success');
+                        
+                        // Redirect to main page after successful login
+                        setTimeout(() => {
+                            window.location.href = 'rough.html';
+                        }, 2000);
+                    });
+                } else {
+                    // User cancelled login or did not fully authorize
+                    showNotification('Facebook login failed. Please try again.', 'error');
+                }
+            }, {scope: 'email'});
+        });
+    </script>
+</body>
+</html>
